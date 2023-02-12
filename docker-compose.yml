@@ -16,9 +16,17 @@ services:
 
   db:
     image: postgres:13
+    restart: always
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=challenge
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql/createTable.sql:/docker-entrypoint-initdb.d/createTable.sql
+      # copy the sql script to fill tables
+      - ./sql/fillTable.sql:/docker-entrypoint-initdb.d/fillTable.sql
+

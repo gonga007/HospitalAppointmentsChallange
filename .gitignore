@@ -46,6 +46,7 @@ spring-*/src/main/java/META-INF/MANIFEST.MF
 .idea
 out
 test-output
+postgres-data
 atlassian-ide-plugin.xml
 
 # VS Code
