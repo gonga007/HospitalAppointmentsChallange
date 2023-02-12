@@ -1,0 +1,26 @@
+
+# Curl for the API createApointment
+curl --location --request POST 'localhost:8080/challenge/api/appointments' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        "patient": "AnaMaria(25)",
+        "doctor": "Paulo",
+        "speciality": "Pediatrics",
+        "pathology": "Pathology 6",
+        "symptoms": [
+            "Symptom 12 Description",
+            "Symptom 13 Description"
+        ]
+}'
+
+#Curl for the API getPatientConsultsAndSymptoms
+curl --location --request GET 'http://localhost:8080/challenge/api/appointments/getPatientConsultsAndSymptoms/Manuel(53)'
+
+#Curl for the API getTopSpecialties
+curl --location --request GET 'localhost:8080/challenge/api/appointments/getTopSpecialties'\
+
+#Curl for the API getAllPatients
+#Please note that none of the parameters are mandatory, the code is prepared to handle null and empty values,
+#patientAge and patientName are NOT comulative and if both are sent, then the patientAge takes precedence
+#If patientAge is sent, the response will be filtered out and sorted out by this parameter
+curl --location --request GET 'localhost:8080/challenge/api/appointments/getAllPatients?patientName=Manuel&patientAge=53&pageRange=25&pageNumber=1&resultsPerPage=25'
