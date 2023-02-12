@@ -1,8 +1,5 @@
 package com.challenge.challenge;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -35,9 +32,9 @@ public class Appointment {
     @Column(name = "doctor")
     private String doctor;
 
-    @Type(type = "text")
+
     @Column(name = "speciality")
-    private String speciality;
+    private Speciality speciality;
 
     @Type(type = "text")
     @Column(name = "pathology")
@@ -49,7 +46,7 @@ public class Appointment {
     private String[] symptoms;
 
 
-    public Appointment(String patient, String doctor, String speciality, String pathology, String[] symptoms) {
+    public Appointment(String patient, String doctor, Speciality speciality, String pathology, String[] symptoms) {
         this.patient = patient;
         this.doctor = doctor;
         this.speciality = speciality;
@@ -90,11 +87,11 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-    public String getSpeciality() {
+    public Speciality getSpeciality() {
         return speciality;
     }
 
-    public void setSpeciality(String speciality) {
+    public void setSpeciality(Speciality speciality) {
         this.speciality = speciality;
     }
 
