@@ -1,5 +1,6 @@
-package com.challenge.challenge;
+package com.challenge.challenge.Entities;
 
+import com.challenge.challenge.DTOs.Speciality;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;

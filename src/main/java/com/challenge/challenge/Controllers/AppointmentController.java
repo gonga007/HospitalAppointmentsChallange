@@ -1,5 +1,13 @@
-package com.challenge.challenge;
+package com.challenge.challenge.Controllers;
 
+import com.challenge.challenge.DTOs.Patient;
+import com.challenge.challenge.DTOs.Speciality;
+import com.challenge.challenge.DTOs.TopSpeciality;
+import com.challenge.challenge.Entities.Appointment;
+import com.challenge.challenge.Repositories.AppointmentRepository;
+import com.challenge.challenge.Utils.Page;
+import com.challenge.challenge.Utils.PatientUtils;
+import com.challenge.challenge.Errors.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -33,10 +41,10 @@ public class AppointmentController {
 
         HashMap<String, List<Appointment>> consultsMap = new HashMap<>();
         consultsMap.put("consults", appointments);
-        if (!CollectionUtils.isEmpty(appointments)) {
-            return ResponseEntity.ok().body(consultsMap);
+        if (CollectionUtils.isEmpty(appointments)) {
+            throw new NotFoundException("There are not appointments for patient: " + patientName, "Appointment");
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(consultsMap);
     }
 
     @GetMapping("getTopSpecialties")
@@ -61,10 +69,10 @@ public class AppointmentController {
         }
         List<TopSpeciality> filteredTopSpecialist = topSpecialities.stream().
                 filter(topSpeciality -> (topSpeciality.getNumberOfPatients() > 2)).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(filteredTopSpecialist)) {
-            return ResponseEntity.ok().body(filteredTopSpecialist);
+        if (CollectionUtils.isEmpty(filteredTopSpecialist)) {
+            throw new NotFoundException("There are no Top Specialites","Top Specialties");
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(filteredTopSpecialist);
 
     }
 
@@ -78,7 +86,7 @@ public class AppointmentController {
 
         List<Appointment> appointments = getAllAppointments();
         if (CollectionUtils.isEmpty(appointments)) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("There are no appointments","Appointment");
         }
         List<Patient> patients = PatientUtils.getInstance().appointmentsListToPatients(appointments);
 
@@ -98,7 +106,8 @@ public class AppointmentController {
         }
 
         if (CollectionUtils.isEmpty(filteredPatients)) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Patient not found for PatientName= " +
+                    patientName + ", PatientAge= " + patientAge, "Patient");
         }
         if (pageRange == null || pageRange == 0L) {
             pageRange = 25;

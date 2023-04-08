@@ -1,4 +1,7 @@
-package com.challenge.challenge;
+package com.challenge.challenge.Utils;
+
+import com.challenge.challenge.Entities.Appointment;
+import com.challenge.challenge.DTOs.Patient;
 
 import java.util.ArrayList;
 import java.util.List;

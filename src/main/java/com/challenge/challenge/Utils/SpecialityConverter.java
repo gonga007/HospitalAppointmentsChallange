@@ -1,4 +1,6 @@
-package com.challenge.challenge;
+package com.challenge.challenge.Utils;
+
+import com.challenge.challenge.DTOs.Speciality;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

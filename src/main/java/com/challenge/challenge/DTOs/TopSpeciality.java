@@ -1,4 +1,4 @@
-package com.challenge.challenge;
+package com.challenge.challenge.DTOs;
 
 public class TopSpeciality {
 

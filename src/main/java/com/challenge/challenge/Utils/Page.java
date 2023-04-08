@@ -1,4 +1,6 @@
-package com.challenge.challenge;
+package com.challenge.challenge.Utils;
+
+import com.challenge.challenge.DTOs.Patient;
 
 import java.util.List;
 import java.util.stream.Collectors;
